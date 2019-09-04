@@ -5,7 +5,7 @@ files:
   type: application/vnd.5gtango.nsd
   tags:
   - eu.5gtango
-- path: vnfd-traefik.yml
+- path: vnfd_traefik.yml
   type: application/vnd.5gtango.vnfd
   tags:
   - eu.5gtango
