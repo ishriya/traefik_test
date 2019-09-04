@@ -26,4 +26,5 @@ RUN mkdir /tngbench_share
 
 EXPOSE 80 8080 443
 
-ENTRYPOINT ["/usr/local/bin/traefik"]
+#ENTRYPOINT ["/usr/local/bin/traefik"]
+CMD /bin/bash
