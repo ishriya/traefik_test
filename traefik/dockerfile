@@ -10,7 +10,7 @@ RUN apt-get -y update && \
 	curl \
 	python3 \
 	python3-pip \
-    vim
+        vim
 
 RUN wget -P /usr/local/bin "https://github.com/containous/traefik/releases/download/v1.7.14/traefik" && \
     chmod u+x /usr/local/bin/traefik
