@@ -3,7 +3,7 @@ descriptor_schema: >-
 vendor: de.upb
 name: ns_traefik
 version: '0.1'
-author: Manuel Peuster
+author: Ishwariya Raveendran
 description: Test service for benchmarking experiments, containing a single VNF.
 network_functions:
   - vnf_id: vnf0
@@ -17,7 +17,10 @@ connection_points:
   - id: "ns:input"
     interface: ipv4
     type: external
-  - id: "ns:output"
+  - id: "ns:output1"
+    interface: ipv4
+    type: external
+  - id: "ns:output2"
     interface: ipv4
     type: external
 virtual_links:
@@ -31,18 +34,24 @@ virtual_links:
     connection_points_reference:
       - "ns:input"
       - "vnf0:input"
-  - id: vnf0-2-output
+  - id: vnf0-2-output1
     connectivity_type: E-Line
     connection_points_reference:
-      - "vnf0:output"
-      - "ns:output"
+      - "vnf0:output1"
+      - "ns:output1"
+  - id: vnf0-2-output2
+    connectivity_type: E-Line
+    connection_points_refernces:
+      - "vnf0:output2"
+      - "ns:output2"
 forwarding_graphs:
   - fg_id: fg01
-    number_of_endpoints: 2
-    number_of_virtual_links: 2
+    number_of_endpoints: 3
+    number_of_virtual_links: 3
     constituent_virtual_links:
       - input-2-vnf0
-      - vnf0-2-output
+      - vnf0-2-output1
+      - vnf0-2-output2
     constituent_vnfs:
       - vnf0
     network_forwarding_paths:
@@ -53,7 +62,11 @@ forwarding_graphs:
             position: 1
           - connection_point_ref: "vnf0:input"
             position: 2
-          - connection_point_ref: "vnf0:output"
+          - connection_point_ref: "vnf0:output1"
             position: 3
-          - connection_point_ref: "ns:output"
+          - connection_point_ref: "ns:output1"
             position: 4
+          - connection_point_ref: "vnf0:output2"
+            position: 5
+          - connection_point_ref: "ns:output2
+            position: 6
