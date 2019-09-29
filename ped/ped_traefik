@@ -33,15 +33,15 @@ service_experiments:
     measurement_points:
       - name: "mp.output1"
         connection_point: "ns:output1"
-        container: ""
+        container: "ishu06/apacli"
         address: "40.0.0.254/24"  # address of the data interface of the MP
       - name: "mp.output2"
         connection_point: "ns:output2"
-        container: ""
+        container: "ishu06/apacli"
         address: "40.0.0.255/24"
       - name: "mp.input"
         connection_point: "ns:input"
-        container: ""
+        container: "ishu06/traefik:new"
         address: "172.20.0.9/16"  # address of the data interface of the MP
     # experiment parameters to be tested during the experiment
     experiment_parameters:
@@ -56,25 +56,25 @@ service_experiments:
         io_bw: null
       - function: "mp.input"
         cmd_start: [
-          "ab -c 1 -e /tngbench_share/ab_logs.csv -s 150 -k -H Host:whoami.docker.localhost http://172.20.0.7:80/" 
+          "ab -c 1 -e /tngbench_share/ab_logs.csv -s 150 -k http://172.20.0.7:80/" 
           ]
-        cmd_stop: null
+        cmd_stop: "./stop.sh"
         cpu_bw: null  # float: fraction of CPU time in vim-emu
         cpu_cores: ["1"]  # string: this is "cpuset_cpu" in vim-emu e.g. ["0, 1"] -> 2 CPUs
         mem_max: null  # int: Memory in MByte
         mem_swap_max: null
         io_bw: null
       - function: "mp.output1"
-        cmd_start: null
-        cmd_stop: null  # dump packet counters to logs
+        cmd_start: "./start.sh"
+        cmd_stop: "./stop.sh"  # dump packet counters to logs
         cpu_bw: null  # float: fraction of CPU time in vim-emu
         cpu_cores: "1"  # string: this is "cpuset_cpu" in vim-emu e.g. ["0, 1"] -> 2 CPUs
         mem_max: null  # int: Memory in MByte
         mem_swap_max: null
         io_bw: null
       - function: "mp.output2"
-        cmd_start: null
-        cmd_stop: null  # dump packet counters to logs
+        cmd_start: "./start.sh"
+        cmd_stop: "./stop.sh"  # dump packet counters to logs
         cpu_bw: null  # float: fraction of CPU time in vim-emu
         cpu_cores: "1"  # string: this is "cpuset_cpu" in vim-emu e.g. ["0, 1"] -> 2 CPUs
         mem_max: null  # int: Memory in MByte
