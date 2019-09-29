@@ -3,7 +3,7 @@ descriptor_schema: >-
 vendor: de.upb
 name: traefik
 version: '0.1'
-#author: Manuel Peuster
+author: Ishwariya Raveendran
 description: Traefik VNF test
 virtual_deployment_units:
   - id: vdu01
@@ -28,10 +28,14 @@ virtual_deployment_units:
         interface: ipv4
         type: internal
         address: "172.20.0.7/16"
-      - id: output
+      - id: output1
         interface: ipv4
         type: internal
         address: "40.0.0.2/124"
+      - id: output2
+        interface: ipv4
+        type: internal
+        address: "40.0.0.3/124"
 connection_points:
   - id: mgmt
     interface: ipv4
@@ -40,10 +44,14 @@ connection_points:
     interface: ipv4
     type: external
     address: "172.20.0.7/16"
-  - id: output
+  - id: output1
     interface: ipv4
     type: external
     address: "40.0.0.2/124"
+  - id: output2
+    interface: ipv4
+    type: external
+    address: "40.0.0.3/124"
 virtual_links:
   - id: mgmt
     connectivity_type: E-LAN
@@ -57,9 +65,15 @@ virtual_links:
       - 'vdu01:input'
       - input
     dhcp: true
-  - id: output
+  - id: output1
     connectivity_type: E-Line
     connection_points_reference:
-      - 'vdu01:output'
-      - output
+      - 'vdu01:output1'
+      - output1
+    dhcp: true
+  - id: output2
+    connectivity_type: E-Line
+    connectivity_points_reference:
+      - 'vdu01:output2'
+      - output2
     dhcp: true
