@@ -11,7 +11,7 @@ descriptor_version: 0.2  # 5GTANGO: 0.2, SONATA 0.1
 vendor: "de.upb"
 name: "ped_traefik"
 version: "1.0"
-#author: "Manuel Peuster, Paderborn University, manuel.peuster@uni-paderborn.de"
+author: "Ishwariya Raveendran"
 description: "PG-Backflip"
 
 # Path to the network service we want to profile (relative from PED location)
@@ -31,13 +31,17 @@ service_experiments:
       version: "0.1"
     # additional containers for traffic generation/measurements (measurement points)
     measurement_points:
-      - name: "mp.output"
-        connection_point: "ns:output"
-        container: "emilevauge/whoami"
+      - name: "mp.output1"
+        connection_point: "ns:output1"
+        container: ""
         address: "40.0.0.254/24"  # address of the data interface of the MP
+      - name: "mp.output2"
+        connection_point: "ns:output2"
+        container: ""
+        address: "40.0.0.255/24"
       - name: "mp.input"
         connection_point: "ns:input"
-        container: "emilevauge/whoami"
+        container: ""
         address: "172.20.0.9/16"  # address of the data interface of the MP
     # experiment parameters to be tested during the experiment
     experiment_parameters:
@@ -60,7 +64,15 @@ service_experiments:
         mem_max: null  # int: Memory in MByte
         mem_swap_max: null
         io_bw: null
-      - function: "mp.output"
+      - function: "mp.output1"
+        cmd_start: null
+        cmd_stop: null  # dump packet counters to logs
+        cpu_bw: null  # float: fraction of CPU time in vim-emu
+        cpu_cores: "1"  # string: this is "cpuset_cpu" in vim-emu e.g. ["0, 1"] -> 2 CPUs
+        mem_max: null  # int: Memory in MByte
+        mem_swap_max: null
+        io_bw: null
+      - function: "mp.output2"
         cmd_start: null
         cmd_stop: null  # dump packet counters to logs
         cpu_bw: null  # float: fraction of CPU time in vim-emu
