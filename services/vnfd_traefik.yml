@@ -1,13 +1,13 @@
 descriptor_schema: >-
   https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/function-descriptor/vnfd-schema.yml
 vendor: de.upb
-name: traefik
+name: lb-traefik
 version: '0.1'
 author: Ishwariya Raveendran
 description: Traefik VNF test
 virtual_deployment_units:
   - id: vdu01
-    vm_image: ishu06/traefik:ubuntu
+    vm_image: ishu06/try
     vm_image_format: docker
     resource_requirements:
       cpu:
@@ -27,15 +27,15 @@ virtual_deployment_units:
       - id: input
         interface: ipv4
         type: internal
-        address: "172.20.0.7/16"
+        address: "20.0.0.254/24"
       - id: output1
         interface: ipv4
         type: internal
-        address: "40.0.0.2/124"
+        address: "40.0.0.1/24"
       - id: output2
         interface: ipv4
         type: internal
-        address: "40.0.0.3/124"
+        address: "40.0.0.2/24"
 connection_points:
   - id: mgmt
     interface: ipv4
@@ -43,15 +43,15 @@ connection_points:
   - id: input
     interface: ipv4
     type: external
-    address: "172.20.0.7/16"
+    address: "20.0.0.254/24"
   - id: output1
     interface: ipv4
     type: external
-    address: "40.0.0.2/124"
+    address: "40.0.0.1/24"
   - id: output2
     interface: ipv4
     type: external
-    address: "40.0.0.3/124"
+    address: "40.0.0.2/24"
 virtual_links:
   - id: mgmt
     connectivity_type: E-LAN
@@ -73,7 +73,7 @@ virtual_links:
     dhcp: true
   - id: output2
     connectivity_type: E-Line
-    connectivity_points_reference:
+    connection_points_reference:
       - 'vdu01:output2'
       - output2
     dhcp: true
