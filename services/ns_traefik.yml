@@ -68,5 +68,5 @@ forwarding_graphs:
             position: 4
           - connection_point_ref: "vnf0:output2"
             position: 5
-          - connection_point_ref: "ns:output2
+          - connection_point_ref: "ns:output2"
             position: 6
